@@ -2,37 +2,33 @@ package com.example.tutorial;
 
 import java.util.List;
 
-/**
- * message PhoneNumber { required string number = 1; optional PhoneType type = 2
- * [default = HOME]; } repeated PhoneNumber phone = 4; }
- * 
- * message AddressBook { repeated Person person = 1; }
- * 
- * @author Administrator
- *
- */
-public class Person {
+public class Demo {
 	private String name;
 	private Integer id;
 	private String email;
-	List<PhoneNumber> phoneNumber;
+	public List<Phone> phone;
 
-	private static class PhoneNumber {
+	public static class Phone {
 		private String number;
 		private PhoneType type = PhoneType.HOME;
+
 		public String getNumber() {
 			return number;
 		}
+
 		public void setNumber(String number) {
 			this.number = number;
 		}
+
 		public PhoneType getType() {
 			return type;
 		}
+
 		public void setType(PhoneType type) {
 			this.type = type;
 		}
 	}
+
 	enum PhoneType {
 		MOBILE(0), HOME(1), WORK(2);
 		private int index;
@@ -65,4 +61,14 @@ public class Person {
 	public void setEmail(String email) {
 		this.email = email;
 	}
+
+	public List<Phone> getPhone() {
+		return phone;
+	}
+
+	public void setPhone(List<Phone> phone) {
+		this.phone = phone;
+	}
+
+
 }

@@ -1,35 +1,24 @@
 package com.example.tutorial;
 
-import java.time.LocalDateTime;
 
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.example.tutorial.AddressBookProtos.Person;
 import com.github.taojoe.Transformer;
-import com.github.taojoe.proto.Transform;
-import com.google.protobuf.ByteString;
 
 @RestController
 public class AddressBookController {
+	
     @RequestMapping("person")
-    AddressBookProtos.Person person() {
-    	Transformer trans=new Transformer();
-    	AddressBookProtos.Person.Builder user= AddressBookProtos.Person.newBuilder().setUid("uu").addTags("aa").addTags("bb")
-                 .setLoginTime(LocalDateTime.now().toString())
-                 .setLevelType(Transform.UserLevelType.LV0)
-                 .setAvatar(ByteString.copyFrom("abc".getBytes()))
-                 .setEnabled(true);
-    	
-    	Person person=trans.messageToJava(message, clz)
-    	
-        return AddressBookProtos.Person.newBuilder()
-                .setId(1234)
-                .setName("John Doe")
-                .setEmail("jdoe@example.com")
-                .addPhone(
-                        AddressBookProtos.Person.PhoneNumber.newBuilder()
-                                .setNumber("555-4321")
-                                .setType(AddressBookProtos.Person.PhoneType.HOME))
-                .build();
+    private Demo getPerson() {
+    	Transformer trans= new Transformer();
+    	AddressBookProtos.Person.Builder user= AddressBookProtos.Person.newBuilder().setId(1)
+    			.setEmail("705366435@qq.com").setName("chenglinjava")
+    			.addPhone(Person.PhoneNumber.newBuilder().setNumber("11").setType(Person.PhoneType.HOME));
+    	Demo demo = trans.messageToJava(user, Demo.class);
+    	System.out.println(demo.getPhone().get(0).getNumber());
+    	System.out.println(demo.getPhone().get(0).getType());
+    	return demo;
     }
 }
